@@ -22,7 +22,7 @@ export default function RegisterPage() {
     e.preventDefault()
     setIsLoading(true)
   
-    const { error } = await supabase.auth.signUp({
+    const { data: _data, error } = await supabase.auth.signUp({
       email,
       password,
     })
