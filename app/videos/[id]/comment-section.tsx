@@ -39,7 +39,7 @@ const initialComments = [
 interface CommentSectionProps {
   videoId: string
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function CommentSection({ videoId }: CommentSectionProps) {
   const [comments, setComments] = useState(initialComments)
   const [newComment, setNewComment] = useState("")
