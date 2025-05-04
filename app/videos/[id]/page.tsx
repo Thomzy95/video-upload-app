@@ -51,6 +51,11 @@ const relatedVideos = [
   },
 ]
 
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
 export default function VideoPage({ params }: { params: { id: string } }) {
   return (
     <div className="flex flex-col min-h-screen">
