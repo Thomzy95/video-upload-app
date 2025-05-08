@@ -5,6 +5,11 @@ import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
 import VideoPlayer from "./video-player"
 import CommentSection from "./comment-section"
 
+interface VideoPageProps {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
 // Przykładowe dane filmu
 const video = {
   id: "1",
@@ -51,9 +56,7 @@ const relatedVideos = [
   },
 ]
 
-export default async function VideoPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = await params;
-
+export default function VideoPage({ params }: VideoPageProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
@@ -115,7 +118,7 @@ export default async function VideoPage({params}: {params: Promise<{ id: string 
             <div className="bg-muted p-4 rounded-lg">
               <p className="whitespace-pre-line">{video.description}</p>
             </div>
-            <CommentSection videoId={(await params).id} />
+            <CommentSection videoId={params.id} />
           </div>
           <div className="space-y-6">
             <h2 className="text-xl font-bold">Powiązane filmy</h2>
