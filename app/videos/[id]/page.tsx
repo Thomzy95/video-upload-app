@@ -51,12 +51,16 @@ const relatedVideos = [
   },
 ]
 
-interface PageProps {
+import { type NextPage } from "next"
+import { type Metadata } from "next"
+
+type Props = {
   params: {
     id: string;
   };
 }
-export default function VideoPage({ params }: PageProps) {
+
+export default function VideoPage({ params }: Props) {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
