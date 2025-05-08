@@ -5,24 +5,33 @@ import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
 import VideoPlayer from "./video-player"
 import CommentSection from "./comment-section"
 
-interface VideoPageProps {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 // Przykładowe dane filmu
-const video = {
-  id: "1",
-  title: "Jak nagrywać krótkie filmy",
-  description:
-    "W tym filmie pokazuję, jak nagrywać krótkie filmy za pomocą smartfona. Omawiam podstawowe techniki, oświetlenie i montaż.",
-  author: "VideoMaster",
-  authorAvatar: "/placeholder.svg?height=40&width=40",
-  views: 1240,
-  likes: 85,
-  date: "2023-10-15",
-  videoUrl: "/placeholder-video.mp4",
-  thumbnail: "/placeholder.svg?height=180&width=320",
+const videos = {
+  "1": {
+    id: "1",
+    title: "Jak nagrywać krótkie filmy",
+    description:
+      "W tym filmie pokazuję, jak nagrywać krótkie filmy za pomocą smartfona. Omawiam podstawowe techniki, oświetlenie i montaż.",
+    author: "VideoMaster",
+    authorAvatar: "/placeholder.svg?height=40&width=40",
+    views: 1240,
+    likes: 85,
+    date: "2023-10-15",
+    videoUrl: "/placeholder-video.mp4",
+    thumbnail: "/placeholder.svg?height=180&width=320",
+  },
+  "2": {
+    id: "2",
+    title: "Mój pierwszy vlog",
+    description: "Dzielę się moimi doświadczeniami z tworzenia pierwszego vloga.",
+    author: "JanVlogger",
+    authorAvatar: "/placeholder.svg?height=40&width=40",
+    views: 856,
+    likes: 45,
+    date: "2023-10-10",
+    videoUrl: "/placeholder-video.mp4",
+    thumbnail: "/placeholder.svg?height=180&width=320",
+  },
 }
 
 // Przykładowe dane powiązanych filmów
@@ -56,7 +65,13 @@ const relatedVideos = [
   },
 ]
 
-export default function VideoPage({ params }: VideoPageProps) {
+export default function VideoPage({ params }: any) {
+  // Pobierz ID z parametrów URL lub użyj domyślnego ID "1"
+  const videoId = params?.id || "1"
+
+  // Pobierz dane filmu na podstawie ID lub użyj domyślnych danych
+  const video = videos[videoId as keyof typeof videos] || videos["1"]
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
@@ -118,7 +133,7 @@ export default function VideoPage({ params }: VideoPageProps) {
             <div className="bg-muted p-4 rounded-lg">
               <p className="whitespace-pre-line">{video.description}</p>
             </div>
-            <CommentSection videoId={params.id} />
+            <CommentSection videoId={videoId} />
           </div>
           <div className="space-y-6">
             <h2 className="text-xl font-bold">Powiązane filmy</h2>
