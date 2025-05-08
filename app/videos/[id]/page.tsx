@@ -51,11 +51,11 @@ const relatedVideos = [
     duration: "4:30",
   },
 ];
+type tParams = Promise<{ id: string }>;
 
-import { use } from "react";
-    
-export default function VideoPage({params}: {params: Promise<{ id: string }>}) {
-const { id } = use(params);
+export default async function VideoPage(props: { params: tParams }) {
+  const { id } = await props.params;
+  const productID = id[1];
 
   return (
     <div className="flex flex-col min-h-screen">
