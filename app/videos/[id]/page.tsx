@@ -53,7 +53,7 @@ const relatedVideos = [
   },
 ];
 
-export default function VideoPage({ params }: { params: { id: string } }) {
+export default function VideoPage({ PageProps }: { params: { id: string } }) {
   const { id } = params;
 
 
