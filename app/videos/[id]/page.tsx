@@ -1,13 +1,11 @@
-// app/videos/[id]/page.tsx
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
+import VideoPlayer from "./video-player"
+import CommentSection from "./comment-section"
 
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react";
-import VideoPlayer from "./video-player";
-import CommentSection from "./comment-section";
-
-
+// Przykładowe dane filmu
 const video = {
   id: "1",
   title: "Jak nagrywać krótkie filmy",
@@ -20,8 +18,9 @@ const video = {
   date: "2023-10-15",
   videoUrl: "/placeholder-video.mp4",
   thumbnail: "/placeholder.svg?height=180&width=320",
-};
+}
 
+// Przykładowe dane powiązanych filmów
 const relatedVideos = [
   {
     id: "2",
@@ -50,13 +49,9 @@ const relatedVideos = [
     thumbnail: "/placeholder.svg?height=180&width=320",
     duration: "4:30",
   },
-];
-type tParams = Promise<{ id: string }>;
+]
 
-export default async function VideoPage(props: { params: tParams }) {
-  const { id } = await props.params;
-  const productID = id[1];
-
+export default function VideoPage({ params }: { params: { id: string } }) {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
@@ -67,7 +62,9 @@ export default async function VideoPage(props: { params: tParams }) {
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/login">
-              <Button variant="ghost" size="sm">Zaloguj się</Button>
+              <Button variant="ghost" size="sm">
+                Zaloguj się
+              </Button>
             </Link>
             <Link href="/register">
               <Button size="sm">Zarejestruj się</Button>
@@ -84,7 +81,7 @@ export default async function VideoPage(props: { params: tParams }) {
               <div className="flex items-center justify-between mt-4">
                 <div className="flex items-center gap-4">
                   <Image
-                    src={video.authorAvatar}
+                    src={video.authorAvatar || "/placeholder.svg"}
                     alt={video.author}
                     width={40}
                     height={40}
@@ -116,7 +113,7 @@ export default async function VideoPage(props: { params: tParams }) {
             <div className="bg-muted p-4 rounded-lg">
               <p className="whitespace-pre-line">{video.description}</p>
             </div>
-            <CommentSection videoId={id} />
+            <CommentSection videoId={params.id} />
           </div>
           <div className="space-y-6">
             <h2 className="text-xl font-bold">Powiązane filmy</h2>
@@ -126,7 +123,7 @@ export default async function VideoPage(props: { params: tParams }) {
                   <div className="flex gap-3">
                     <div className="relative flex-shrink-0">
                       <Image
-                        src={relatedVideo.thumbnail}
+                        src={relatedVideo.thumbnail || "/placeholder.svg"}
                         alt={relatedVideo.title}
                         width={160}
                         height={90}
@@ -156,5 +153,5 @@ export default async function VideoPage(props: { params: tParams }) {
         </div>
       </footer>
     </div>
-  );
+  )
 }
