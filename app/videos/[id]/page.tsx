@@ -1,6 +1,3 @@
-// app/videos/[id]/page.tsx
-// @ts-nocheck
-
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -8,6 +5,9 @@ import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react";
 import VideoPlayer from "./video-player";
 import CommentSection from "./comment-section";
 
+type Props = {
+  params: Promise<{ id: string }>;
+}
 
 const video = {
   id: "1",
@@ -53,8 +53,8 @@ const relatedVideos = [
   },
 ];
 
-export default function VideoPage({ PageProps }: { params: { id: string } }) {
-  const { id } = params;
+export default async function VideoPage({ params }: Props) {
+  const { id } = await params;
 
 
   return (
