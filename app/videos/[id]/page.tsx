@@ -8,9 +8,8 @@ import VideoPlayer from "./video-player";
 import CommentSection from "./comment-section";
 
 type Props = {
-  params: {
-    id: string;
-  };
+  // params is now a Promise that resolves to { id: string }
+  params: Promise<{ id: string }>;
 };
 
 const video = {
@@ -57,8 +56,8 @@ const relatedVideos = [
   },
 ];
 
-export default function VideoPage({ params }: Props) {
-  const { id } = params;
+export default async function VideoPage({ params }: Props) {
+  const { id } = await params;
 
   return (
     <div className="flex flex-col min-h-screen">
