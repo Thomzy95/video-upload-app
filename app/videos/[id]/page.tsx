@@ -1,13 +1,18 @@
 // app/videos/[id]/page.tsx
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
-import VideoPlayer from "./video-player"
-import CommentSection from "./comment-section"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react";
+import VideoPlayer from "./video-player";
+import CommentSection from "./comment-section";
 
-// Dummy video data
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
 const video = {
   id: "1",
   title: "Jak nagrywać krótkie filmy",
@@ -20,7 +25,7 @@ const video = {
   date: "2023-10-15",
   videoUrl: "/placeholder-video.mp4",
   thumbnail: "/placeholder.svg?height=180&width=320",
-}
+};
 
 const relatedVideos = [
   {
@@ -50,17 +55,10 @@ const relatedVideos = [
     thumbnail: "/placeholder.svg?height=180&width=320",
     duration: "4:30",
   },
-]
+];
 
-type PageProps = {
-  params: {
-    id: string
-  }
-}
-
-// ✅ This is the correct version
-export default function VideoPage({ params }: PageProps) {
-  const { id } = params
+export default function VideoPage({ params }: Props) {
+  const { id } = params;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -72,9 +70,7 @@ export default function VideoPage({ params }: PageProps) {
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/login">
-              <Button variant="ghost" size="sm">
-                Zaloguj się
-              </Button>
+              <Button variant="ghost" size="sm">Zaloguj się</Button>
             </Link>
             <Link href="/register">
               <Button size="sm">Zarejestruj się</Button>
@@ -163,5 +159,5 @@ export default function VideoPage({ params }: PageProps) {
         </div>
       </footer>
     </div>
-  )
+  );
 }
