@@ -7,11 +7,6 @@ import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react";
 import VideoPlayer from "./video-player";
 import CommentSection from "./comment-section";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
 
 const video = {
   id: "1",
