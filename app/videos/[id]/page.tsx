@@ -1,3 +1,5 @@
+import { type Metadata } from "next"
+import type { InferGetStaticPropsType } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -51,16 +53,13 @@ const relatedVideos = [
   },
 ]
 
-import { type NextPage } from "next"
-import { type Metadata } from "next"
-
-type Props = {
+type PageProps = {
   params: {
-    id: string;
-  };
+    id: string
+  }
 }
 
-export default function VideoPage({ params }: { params: { id: string } }) {
+export default function VideoPage({ params }: PageProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
