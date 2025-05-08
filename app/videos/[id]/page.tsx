@@ -6,10 +6,7 @@ import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
 import VideoPlayer from "./video-player"
 import CommentSection from "./comment-section"
 
-type Props = {
-  // Next.js 15 passes params as a Promise
-  params: Promise<{ id: string }>;
-};
+
 
 // Przykładowe dane filmu
 const videos = {
@@ -70,13 +67,14 @@ const relatedVideos = [
     duration: "4:30",
   },
 ]
+type tParams = Promise<{ videoId: string }>;
 
-export default async function VideoPage({ params }: Props) {
-  // Pobierz ID z parametrów URL lub użyj domyślnego ID "1"
-  const { id: videoId } = await params;
+export default async function VideoPage({ params }: { params:  tParams }) {
+  const { videoId }: {videoId: string} = await params; // fix this line
+  
 
   // Pobierz dane filmu na podstawie ID lub użyj domyślnych danych
-  const video = videos[videoId as keyof typeof videos] || videos["1"]
+  const video = videos[videoId as unknown as keyof typeof videos] || videos["1"]
 
   return (
     <div className="flex flex-col min-h-screen">
