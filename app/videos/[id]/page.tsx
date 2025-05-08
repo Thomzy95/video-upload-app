@@ -52,10 +52,8 @@ const relatedVideos = [
     duration: "4:30",
   },
 ];
-
-export default async function VideoPage({ params }: Props) {
+export default async function VideoPage({params}: {params: Promise<{ id: string }>}) {
   const { id } = await params;
-
 
   return (
     <div className="flex flex-col min-h-screen">
