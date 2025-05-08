@@ -1,9 +1,15 @@
+
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Film, ThumbsUp, Share2, Bookmark } from "lucide-react"
 import VideoPlayer from "./video-player"
 import CommentSection from "./comment-section"
+
+type Props = {
+  // Next.js 15 passes params as a Promise
+  params: Promise<{ id: string }>;
+};
 
 // Przykładowe dane filmu
 const videos = {
@@ -65,9 +71,9 @@ const relatedVideos = [
   },
 ]
 
-export default function VideoPage({ params }: any) {
+export default async function VideoPage({ params }: Props) {
   // Pobierz ID z parametrów URL lub użyj domyślnego ID "1"
-  const videoId = params?.id || "1"
+  const { id: videoId } = await params;
 
   // Pobierz dane filmu na podstawie ID lub użyj domyślnych danych
   const video = videos[videoId as keyof typeof videos] || videos["1"]
