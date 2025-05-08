@@ -1,3 +1,5 @@
+// app/videos/[id]/page.tsx
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -6,8 +8,10 @@ import VideoPlayer from "./video-player";
 import CommentSection from "./comment-section";
 
 type Props = {
-  params: Promise<{ id: string }>;
-}
+  params: {
+    id: string;
+  };
+};
 
 const video = {
   id: "1",
@@ -52,8 +56,11 @@ const relatedVideos = [
     duration: "4:30",
   },
 ];
-export default async function VideoPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = await params;
+
+import { use } from "react";
+    
+export default function VideoPage({params}: {params: Promise<{ id: string }>}) {
+const { id } = use(params);
 
   return (
     <div className="flex flex-col min-h-screen">
